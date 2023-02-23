@@ -1,2 +1,2 @@
-# num4solofequ
-方程式の解析的な解法
+# num4equation
+数値計算による方程式の解析的な解法
