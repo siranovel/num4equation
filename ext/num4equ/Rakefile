@@ -1,0 +1,5 @@
+require 'ffi-compiler/compile_task'
+
+FFI::Compiler::CompileTask.new('num4equ') do |c|
+    c.ldflags << "-lm"
+end
