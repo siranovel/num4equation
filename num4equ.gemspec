@@ -12,5 +12,5 @@ Gem::Specification.new do |s|
   s.files       += Dir.glob("{lib,ext}/**/*")
   s.extensions  = %w[ext/num4equ/Rakefile]
   s.add_dependency 'ffi-compiler', '~> 1.0', '>= 1.0.1'
-  s.add_development_dependency 'rake', '~> 12.3', '>= 12.3.3'
+  s.add_dependency 'rake', '~> 12.3', '>= 12.3.3'
 end
