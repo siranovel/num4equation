@@ -21,12 +21,14 @@ static CNum4Equ _cNum4Equ = {
 double CNum4Equ_newtonMethodFFI(double a, Func func, DFunc dFunc, int *ok)
 {
     assert(func != 0);
+    assert(dFunc != 0);
 
     return _cNum4Equ.FP_newtonMethodFFI(a, func, dFunc, ok);
 }
 double CNum4Equ_bisectionMethodFFI(double a, double b, Func func, int *ok)
 {
     assert(func != 0);
+    assert(a < b);
 
     return _cNum4Equ.FP_bisectionMethodFFI(a, b, func, ok);
 }
@@ -65,13 +67,17 @@ static double CNum4Equ_doBisectionMethodFFI(double a, double b, Func func, int *
     double xc;
 
     *ok = (fa * fb) < 0 ? 0 : -1; 
-    while(!(fabs(a - b) < EPS)) {
+    do {
         xc = (a + b) / 2.0;
         fxc = func(xc);
-        if (fxc * fa < 0) { b = xc; }
-        else { a = xc; }
-        fa = func(a);
-    }
+        if (0.0 >= fa * fxc) {
+            b = xc;
+            fb = fxc;
+        } else {
+            a = xc;
+            fa = fxc;
+        }
+    } while(fxc != 0 && fabs(b - a) > EPS);
     return xc; 
 }
 
