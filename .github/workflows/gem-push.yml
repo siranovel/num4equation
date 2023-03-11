@@ -33,7 +33,6 @@ jobs:
 
     - name: Publish to RubyGems
       run: |
-        gem update --system
         mkdir -p ~/.gem
         touch ~/.gem/credentials
         chmod 0600 ~/.gem/credentials
