@@ -1,4 +1,21 @@
 version: 0.0.6
-
-jobs
-
+orbs:
+  ruby: circleci/ruby@1.0.4
+jobs:
+  deploy:
+    docker:
+      - image: cimg/ruby:2.7
+    steps:
+      - checkout
+      - ruby/install-deps
+      - run:
+          name: Publish gem to Rubygems
+          command: |
+            echo "Hello world"
+  workflows:
+    my-workflow:
+      jobs:
+        - deploy
+            filters:
+              branches:
+                only: main
