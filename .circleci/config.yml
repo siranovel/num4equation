@@ -13,6 +13,7 @@ jobs:
           command: |
             echo "Hello world"
 workflows:
+  version: 2.1
   my-workflow:
      jobs:
        - deploy
