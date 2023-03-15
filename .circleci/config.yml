@@ -1,20 +1,23 @@
 version: 2.1
+orbs:
+  ruby: circleci/ruby@1.4.0
 jobs:
-  bar:
-    machine: true
+  build:
+    docker:
+      - image: cimg/ruby:3.1.0
+    executor: ruby/default
     steps:
       - checkout
       - run:
-        command: echo "building"
-      - run:
-        command: echo "testing"
+        name: which bundler?
+        command: bundler -v
+      - ruby/bundle-install
 workflows:
-  build:
+  version: 2.1
+  my-workflow:
     jobs:
-      - bar:
-        pre-steps:
-          - run:
-            command: echo "install custom dependency"
-        post-steps:
-          - run:
-            command: echo "upload artifact to s3"
+      - build:
+        filters:
+          branches:
+          only:
+            - master
