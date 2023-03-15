@@ -1,23 +1,20 @@
 version: 2.1
-orbs:
-  ruby: circleci/ruby@1.0.4
 jobs:
-  deploy:
-    docker:
-      - image: cimg/ruby:3.2.1
+  bar:
+    machine: true
     steps:
       - checkout
-      - ruby: ruby --version
       - run:
-          name: Publish gem to Rubygems
-          command: |
-            echo "Hello world"
+        command: echo "building"
+      - run:
+        command: echo "testing"
 workflows:
-  version: 2.1
-  my-workflow:
-     jobs:
-       - deploy:
-           filters:
-             branches:
-               only:
-                 - master
+  build:
+    jobs:
+      - bar:
+        pre-steps:
+          - run:
+            command: echo "install custom dependency"
+        post-steps:
+          - run:
+            command: echo "upload artifact to s3"
