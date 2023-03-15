@@ -15,7 +15,7 @@ jobs:
   workflows:
     my-workflow:
       jobs:
-        - deploy
+        - deploy:
             filters:
               branches:
                 only:
