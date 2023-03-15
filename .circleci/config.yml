@@ -15,5 +15,4 @@ jobs:
 workflows:
   my-workflow:
      jobs:
-       - build
        - deploy
