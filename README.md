@@ -4,6 +4,7 @@ num4equation
 
 ## decscription ##
 
+詳細は、https://siranovel.github.io/mydocs/num4equation
 
 ## Demo ##
 
