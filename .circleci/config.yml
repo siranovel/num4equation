@@ -14,9 +14,10 @@ jobs:
             echo "Hello world"
   workflows:
     my-workflow:
-      jobs:
-        - deploy:
-            filters:
-              branches:
-                only:
-                  - main
+      build:
+        jobs:
+          - deploy:
+              filters:
+                branches:
+                  only:
+                    - main
