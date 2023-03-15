@@ -2,6 +2,7 @@ version: 0.0.6
 orbs:
   ruby: circleci/ruby@1.0.4
 jobs:
+  build:
   deploy:
     docker:
       - image: cimg/ruby:2.7
@@ -12,7 +13,8 @@ jobs:
           name: Publish gem to Rubygems
           command: |
             echo "Hello world"
-  workflows:
-    my-workflow:
-       jobs:
-         - deploy:
+workflows:
+  my-workflow:
+     jobs:
+       - build
+       - deploy
