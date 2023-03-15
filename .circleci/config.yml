@@ -2,12 +2,12 @@ version: 2.1
 orbs:
   ruby: circleci/ruby@1.0.4
 jobs:
-  deploy:
+  build:
     docker:
-      - image: cimg/ruby:2.7
+      - image: cimg/ruby:3.2.1
     steps:
       - checkout
-      - ruby/install-deps
+      - ruby: ruby --version
       - run:
           name: Publish gem to Rubygems
           command: |
@@ -16,4 +16,4 @@ workflows:
   version: 2.1
   my-workflow:
      jobs:
-       - deploy
+       - build
