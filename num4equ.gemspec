@@ -1,6 +1,6 @@
 Gem::Specification.new do |s|
   s.name        = 'num4equ'
-  s.version     = '0.0.6'
+  s.version     = '0.0.7'
   s.date        = '2023-03-08'
   s.summary     = "num for equation"
   s.description = "numerical solution for equation"
