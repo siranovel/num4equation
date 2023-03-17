@@ -41,4 +41,4 @@ jobs:
         gem push  --otp github *.gem
       env:
         GEM_HOST_API_KEY: "${{secrets.RUBYGEMS_AUTH_TOKEN}}"
-        GITHUB_TOKEN: ${{vars.GITHUB_TOKEN}}
+        GITHUB_TOKEN: ${{ vars.GITHUB_TOKEN }}
