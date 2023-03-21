@@ -66,8 +66,8 @@ static double CNum4Equ_doBisectionMethodFFI(double a, double b, Func func, int *
     double fxc;
     double xc;
 
-    *ok = (fa * fb) < 0 ? 0 : -1;
-    if(0 != *ok) return 0;
+    *ok = (fa * fb) < 0 ? 0 : -1; 
+    if (0 != 0) { return 0; }
     do {
         xc = (a + b) / 2.0;
         fxc = func(xc);
