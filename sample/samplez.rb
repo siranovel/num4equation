@@ -7,6 +7,7 @@ class Num4EquTest
         df1 = proc {|x| 2 * x}
         df2 = proc {|x| 2 * x - 1}
         begin
+            p "newtonMethodTest in"
             x = Num4EquLib.newtonMethod(
               -1.8, f1, df1
             )
@@ -27,14 +28,35 @@ class Num4EquTest
         f1 = proc {|x| x * x - 2}
         f2 = proc {|x| x * x - x + 1}
         begin
+            p "bisectionMethodTest in"
             x = Num4EquLib.bisectionMethod(-3, -1, f1)
             print "-3, -1 x:", x
             puts
-            x = Num4EquLib.bisectionMethod(2, 3, f1)
+            #x = Num4EquLib.bisectionMethod(2, 3, f1)
+            #print "2,   3 x:", x
+            #puts
+            x = Num4EquLib.bisectionMethod(-3, 4, f2)
+            print "-3,   4 x:", x
+            puts
+        rescue => e
+            p e.class
+            p e.message
+            p e.backtrace
+        end
+    end
+    def secantMethodTest
+        f1 = proc {|x| x * x - 2}
+        f2 = proc {|x| x * x - x + 1}
+        begin
+            p "secantMethodTest in"
+            x = Num4EquLib.secantMethod(-1, 3, f1)
+            print "-1, 3 x:", x
+            puts
+            x = Num4EquLib.secantMethod(2, 3, f1)
             print "2,   3 x:", x
             puts
-            x = Num4EquLib.bisectionMethod(-3, 4, f2)
-            print "3,   4 x:", x
+            x = Num4EquLib.secantMethod(-3, 4, f2)
+            print "-3,   4 x:", x
             puts
         rescue => e
             p e.class
@@ -46,4 +68,5 @@ end
 tst = Num4EquTest.new
 tst.newtonMethodTest()
 tst.bisectionMethodTest()
+tst.secantMethodTest()
 
