@@ -12,6 +12,7 @@ struct _CNum4Equ
 {
     double (*FP_newtonMethodFFI)(double a, Func func, DFunc dFunc, int *ok);
     double (*FP_bisectionMethodFFI)(double a, double b, Func func, int *ok);
+    double (*FP_secantMethodFFI)(double a, double b, Func func, int *ok);
 };
 /**********************************************/
 /* definen宣言                                */
@@ -22,4 +23,5 @@ struct _CNum4Equ
 /**********************************************/
 double CNum4Equ_newtonMethodFFI(double a, Func func, DFunc dFunc, int *ok);
 double CNum4Equ_bisectionMethodFFI(double a, double b, Func func, int *ok);
+double CNum4Equ_secantMethodFFI(double a, double b, Func func, int *ok);
 #endif
