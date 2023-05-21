@@ -1,6 +1,6 @@
 Gem::Specification.new do |s|
   s.name        = 'num4equ'
-  s.version     = '0.0.9'
+  s.version     = '0.1.1'
   s.date        = '2023-04-17'
   s.summary     = "num for equation"
   s.description = "numerical solution for equation"
@@ -8,9 +8,10 @@ Gem::Specification.new do |s|
   s.email       = "siranovel@gmail.com"
   s.homepage    = "http://github.com/siranovel/num4equation"
   s.metadata    = {
-      'changelog_uri'     => 'http://github.com/siranovel/num4equation/blob/main/CHANGELOG.md',
+      'changelog_uri'     => s.homepage + '/blob/main/CHANGELOG.md',
       'documentation_uri' => "https://rubydoc.info/gems/#{s.name}/#{s.version}",
       'homepage_uri'      => s.homepage,
+      'wiki_uri'          => 'https://github.com/siranovel/mydocs/tree/main/num4equation',
   }
   s.license     = "MIT"
   s.files       = ["LICENSE", "Gemfile", "CHANGELOG.md"]
