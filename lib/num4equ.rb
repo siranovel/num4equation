@@ -13,29 +13,23 @@ module Num4EquLib
     #   @yieldparam [double] aの値
     #   @return [double] xの値
     callback   :f, [:double], :double
-    # @overload dfunc(a)
-    #   @yield [a] 関数に対する微分関数  
-    #   @yieldparam [double] aの値
-    #   @return [double] xの値
-    callback   :df, [:double], :double
 
     attach_function :newtonMethodFFI,
-        :CNum4Equ_newtonMethodFFI, [:double, :f, :df, :buffer_out], :double
+        :CNum4Equ_newtonMethodFFI, [:double, :f, :buffer_out], :double
     attach_function :bisectionMethodFFI,
         :CNum4Equ_bisectionMethodFFI, [:double, :double, :f, :buffer_out], :double
     attach_function :secantMethodFFI,
         :CNum4Equ_secantMethodFFI, [:double, :double, :f, :buffer_out], :double
     class << self
-        # @overload newtonMethod(a, func, dfunc)
+        # @overload newtonMethod(a, func)
         #   ニュートン法による解法
         #   @param [double] a aの値
         #   @param [callback] func aに対する値を計算
-        #   @param [callback] dfunc fに対する微分関数
         #   @return [double] xの値
         #   @raise RangeError
-        def newtonMethod(a, func, dfunc)
+        def newtonMethod(a, func)
             ok_ptr = FFI::MemoryPointer.new :int 
-            x = newtonMethodFFI(a, func, dfunc, ok_ptr)
+            x = newtonMethodFFI(a, func, ok_ptr)
             ok = ok_ptr.read_int
             ok_ptr.free()
             if ok < 0 then
@@ -77,7 +71,6 @@ module Num4EquLib
             end
             return x
         end
-
         private :newtonMethodFFI
         private :bisectionMethodFFI
         private :secantMethodFFI
