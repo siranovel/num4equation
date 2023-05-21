@@ -7,6 +7,9 @@
 ### fixed
 - fix use definition of derivative for newtonMethod  
 
+### Added
+- Add wiki_rui into file of gemspec.
+
 ## [0.0.9] - 2023-04-18 
 
 ### Added
