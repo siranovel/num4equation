@@ -4,7 +4,7 @@
 #include <math.h>
 #include "CNum4Equ.h"
 
-static double CNum4Equ_doNewtonMethodFFI(double a, Func func, DFunc dFunc, int *ok);
+static double CNum4Equ_doNewtonMethodFFI(double a, Func func, int *ok);
 static double CNum4Equ_doBisectionMethodFFI(double a, double b, Func func, int *ok);
 static double CNum4Equ_doSecantMethodFFI(double a, double b, Func func, int *ok);
 
@@ -20,12 +20,11 @@ static CNum4Equ _cNum4Equ = {
 /**************************************/
 /* Class部                            */
 /**************************************/
-double CNum4Equ_newtonMethodFFI(double a, Func func, DFunc dFunc, int *ok)
+double CNum4Equ_newtonMethodFFI(double a, Func func, int *ok)
 {
     assert(func != 0);
-    assert(dFunc != 0);
 
-    return _cNum4Equ.FP_newtonMethodFFI(a, func, dFunc, ok);
+    return _cNum4Equ.FP_newtonMethodFFI(a, func, ok);
 }
 double CNum4Equ_bisectionMethodFFI(double a, double b, Func func, int *ok)
 {
@@ -42,32 +41,40 @@ double CNum4Equ_secantMethodFFI(double a, double b, Func func, int *ok)
     return _cNum4Equ.FP_secantMethodFFI(a, b, func, ok);
 }
 /**************************************/
-/* 処理実行部                         */
+/* 処理実行部                          */
 /**************************************/
-static double CNum4Equ_doNewtonMethodFFI(double a, Func func, DFunc dFunc, int *ok)
+/*
+ * ニュートン法
+ */
+static double CNum4Equ_doNewtonMethodFFI(double a, Func func, int *ok)
 {
-    double xn;
-    double x0 = a;
+    double xn = a;
+    double xn_1;
     long idx = 0;
 
     *ok = 0;
-    xn = x0;
     do {
-        double f;
+        double fx;
+        double fxh;
         double df;
 
-        x0 = xn;
-        f = func(x0);
-        df = dFunc(x0);
-        xn = -1 * f / df + x0;
+        fx = func(xn);
+        fxh = func(xn + DX);
+        df = (fxh - fx) / DX;
+        xn_1 = xn + -1 * fx / df;
+        if (fabs(xn_1 - xn) < EPS) break;
+        xn = xn_1;
         idx++;
         if (100000 < idx) {
             *ok = -1;
             break;
         } 
-    } while(fabs(xn - x0) > EPS);
+    } while(1);
     return xn;
 }
+/*
+ * ２分法
+ */
 static double CNum4Equ_doBisectionMethodFFI(double a, double b, Func func, int *ok)
 {
     double fa = func(a);
@@ -76,7 +83,7 @@ static double CNum4Equ_doBisectionMethodFFI(double a, double b, Func func, int *
     double xc;
 
     *ok = (fa * fb) < 0 ? 0 : -1; 
-    if (0 != ok) { return 0; }
+    if (0 != *ok) { return 0; }
     do {
         xc = (a + b) / 2.0;
         fxc = func(xc);
@@ -90,6 +97,9 @@ static double CNum4Equ_doBisectionMethodFFI(double a, double b, Func func, int *
     } while(fxc != 0 && fabs(b - a) > EPS);
     return xc; 
 }
+/*
+ * 割線法
+ */
 static double CNum4Equ_doSecantMethodFFI(double a, double b, Func func, int *ok)
 {
     double new_x = 0.0;
@@ -118,5 +128,4 @@ static double CNum4Equ_doSecantMethodFFI(double a, double b, Func func, int *ok)
     } while(1);
     return new_x;
 }
-
 
