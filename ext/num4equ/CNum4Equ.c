@@ -56,12 +56,13 @@ static double CNum4Equ_doNewtonMethodFFI(double a, Func func, int *ok)
     do {
         double fx;
         double fxh;
-        double df;
 
+        // xn_1 = xn - f(x)/f'(x)
+        // f'(x) = lim    (f(x + h) - f(x)) / h
+        //         h -> 0
         fx = func(xn);
         fxh = func(xn + DX);
-        df = (fxh - fx) / DX;
-        xn_1 = xn + -1 * fx / df;
+        xn_1 = xn + -1 * DX * fx / (fxh - fx);
         if (fabs(xn_1 - xn) < EPS) break;
         xn = xn_1;
         idx++;
