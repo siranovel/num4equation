@@ -21,12 +21,19 @@ module Num4EquLib
     attach_function :secantMethodFFI,
         :CNum4Equ_secantMethodFFI, [:double, :double, :f, :buffer_out], :double
     class << self
+        # ニュートン法による解法
+        # 
         # @overload newtonMethod(a, func)
-        #   ニュートン法による解法
         #   @param [double] a aの値
         #   @param [callback] func aに対する値を計算
         #   @return [double] xの値
         #   @raise RangeError
+        # @example
+        #   f1 = proc {|x| 
+        #     next x * x - 2
+        #   }
+        #   x = Num4EquLib.newtonMethod(-1.8, f1)
+        # 
         def newtonMethod(a, func)
             ok_ptr = FFI::MemoryPointer.new :int 
             x = newtonMethodFFI(a, func, ok_ptr)
@@ -37,13 +44,19 @@ module Num4EquLib
             end
             return x
         end
+        # 二分法による解法
+        # 
         # @overload bisection(a, b, func)
-        #   二分法による解法
         #   @param [double] a aの値
         #   @param [double] b bの値
         #   @param [callback] func aに対する値を計算
         #   @return [double] xの値
         #   @raise RangeError
+        # @example
+        #   f1 = proc {|x| 
+        #     next x * x - 2
+        #   }
+        #   x = Num4EquLib.bisectionMethod(-3, -1, f1)
         def bisectionMethod(a, b, func)
             ok_ptr = FFI::MemoryPointer.new :int 
             x = bisectionMethodFFI(a, b, func, ok_ptr)
@@ -54,13 +67,19 @@ module Num4EquLib
             end
             return x
         end
+        # 割線法による解法
+        # 
         # @overload secantMethod(a, b, func)
-        #   割線法による解法
         #   @param [double] a aの値
         #   @param [double] b bの値
         #   @param [callback] func aに対する値を計算
         #   @return [double] xの値
         #   @raise RangeError
+        # @example
+        #   f1 = proc {|x| 
+        #     next x * x - 2
+        #   }
+        #   x = Num4EquLib.secantMethod(-1, 3, f1)
         def secantMethod(a, b, func)
             ok_ptr = FFI::MemoryPointer.new :int 
             x = secantMethodFFI(a, b, func, ok_ptr)
