@@ -19,7 +19,9 @@ jobs:
       run: |
         ruby -S gem build *.gemspec
         ruby -S gem install *.gem
-        ruby -S sample/samplez.rb
+        cd sample
+        rake -f equ.rk spec
+        # ruby -S sample/samplez.rb
   
   build:
     name: Build + Publish
