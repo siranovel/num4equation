@@ -4,7 +4,7 @@ num4equation
 
 ## decscription ##
 
-詳細は、https://siranovel.github.io/mydocs/num4equation
+詳細は、https://siranovel.github.io/mydocs/num4equation  
 
 ## Demo ##
 
@@ -15,7 +15,7 @@ ruby FFI-compilerライブラリ
 
 ## Usage ##
 
-sample/samplez.rbファイルを参照
+sample/spec内の各ファイル参照
 
 ## install ##
 
